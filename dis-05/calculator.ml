@@ -86,7 +86,7 @@ let expected = [
 let _ = List.iter2
   (fun input expected ->
     match exp_of_string input with
-    | None -> ()
+    | None -> print_endline "Invalid expression"
     | Some exp -> begin
       print_string (string_of_exp exp);
       print_string " evaluates to ";
