@@ -80,3 +80,10 @@ let expected = [
   "i";
   "6";
 ]
+
+let _ = List.iter2 (fun exp expected ->
+  print_string (string_of_exp exp);
+  print_string " evaluates to ";
+  print_endline (exp |> evaluate |> string_of_value)
+) expressions expected
+  
