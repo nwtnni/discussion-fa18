@@ -66,11 +66,12 @@ let evaluate (exp: exp) : value = match exp with
 | _ -> failwith "unimplemented"
 
 let expressions = [
-  Value Inf;
-  Value (Int 1);
-  Binop (Add, Value (Int 1), Value (Int 2));
-  Binop (Mul, Value Inf, Value (Int 2));
-  Binop (Add, Value (Int 1), Binop (Add, Value (Int 2), Value (Int 3)));
+  "i";
+  "1";
+  "1+2";
+  "i*5";
+  "1+2+3";
+  "1*1*4";
 ]
 
 let expected = [
@@ -79,11 +80,18 @@ let expected = [
   "3";
   "i";
   "6";
+  "4";
 ]
 
-let _ = List.iter2 (fun exp expected ->
-  print_string (string_of_exp exp);
-  print_string " evaluates to ";
-  print_endline (exp |> evaluate |> string_of_value)
-) expressions expected
-  
+let _ = List.iter2
+  (fun input expected ->
+    match exp_of_string input with
+    | None -> ()
+    | Some exp -> begin
+      print_string (string_of_exp exp);
+      print_string " evaluates to ";
+      print_endline (exp |> evaluate |> string_of_value)
+    end
+  ) 
+  expressions
+  expected
