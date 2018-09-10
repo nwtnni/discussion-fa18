@@ -6,9 +6,9 @@ type binop =
 | Mul
 
 (** Tries to convert a char into a binary operator.
-  For example, [binop_of_char "+"] is [Some Add].
-  @param c An arbitrary character
-  @return [Some op] if [c] is a valid operator, otherwise [None].
+    For example, [binop_of_char "+"] is [Some Add].
+    @param c An arbitrary character
+    @return [Some op] if [c] is a valid operator, otherwise [None].
  *)
 let binop_of_char (c: char) : binop option = match c with
 | _ -> failwith "unimplemented"
@@ -23,8 +23,8 @@ type value =
 | Int of int
 
 (** Tries to convert a char into a value.
-  @param c An arbitrary character
-  @return [Some value] if [c] is a valid number, otherwise [None].
+    @param c An arbitrary character
+    @return [Some value] if [c] is a valid number, otherwise [None].
  *)
 let value_of_char (c: char) : value option = match c with
 | _ -> failwith "unimplemented"
@@ -39,13 +39,14 @@ type exp =
 | Binop of binop * exp * exp
 
 (** Parse a string in the following format into an expression:
-  
+
    exp ::= 0 - 9
          | i
          | exp+exp
          | exp*exp
-  
-   For example, "1+2*3+i" or "9*0+1" or "i*i".
+
+   For example, "1+2*3+i" or "9*0+1" or "i*i". Assume that
+   all operators have no precedence and evaluate left-to-right.
 
    @param s An arbitrary string.
    @return [Some exp] if [s] is a valid expression, otherwise [None].
@@ -58,11 +59,23 @@ let string_of_exp (e: exp) : string = match e with
 | _ -> failwith "unimplemented"
 
 (** Evaluates an expression to a value using the following rules:
-  1) Infinity + anything is infinity
-  2) Infinity * anything is infinity
-  3) Everything is as you'd expect
+    1) Infinity + anything is infinity
+    2) Infinity * anything is infinity
+    3) Everything is as you'd expect
  *)
-let evaluate (exp: exp) : value = match exp with
+let rec evaluate (exp: exp) : value = match exp with
+| _ -> failwith "unimplemented"
+
+(** Counts the number of times infinity appears in an expression.
+    For example, "i*i+i" has 3 infinities. 
+ *)
+let rec count_infinity (exp: exp) : int = match exp with
+| _ -> failwith "unimplemented"
+
+(** Increment every number in [exp] by one.
+    For example, "1+2*3" becomes "2+3*4".
+ *)
+let rec add_one (exp: exp) : exp = match exp with
 | _ -> failwith "unimplemented"
 
 let expressions = [
