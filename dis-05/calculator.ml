@@ -59,7 +59,7 @@ let string_of_exp (e: exp) : string = match e with
 
 (** Evaluates an expression to a value using the following rules:
   1) Infinity + anything is infinity
-  2) Infinifty * anything is infinity
+  2) Infinity * anything is infinity
   3) Everything is as you'd expect
  *)
 let evaluate (exp: exp) : value = match exp with
