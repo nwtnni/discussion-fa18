@@ -1,2 +1,4 @@
 #use "zero.ml";;
 #use "pair.ml";;
+#use "positive.ml";;
+#use "seal.ml";;
