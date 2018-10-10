@@ -396,11 +396,6 @@ type ('a, 'b) wild =
 | Node of (('a, 'b) wild * 'a * ('a, 'b) wild * 'b * ('a, 'b) wild)
 ```
 
----
-
-## Tree Traversal
-
-Exercises coming soon!
 
 ---
 
@@ -464,7 +459,7 @@ This also shows another use for anonymous functions! (i.e. `fun x -> x + 1`)
 
 ---
 
-### More examples
+### More map examples
 
 There are TONS of examples in the textbook! 
 See chapters 5.8 - 5.12
