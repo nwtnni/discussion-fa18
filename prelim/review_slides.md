@@ -244,6 +244,7 @@ end
 - : int = 1
 ```
 
+
 ---
 ### Notes 
 We didn't have time to get through everything in discussion! We'll answer some more of the questions you provided us through the Google form in the following slides.
@@ -269,7 +270,40 @@ Similarly, the != operator checks physical inequality - it returns true when the
 
 
 ---
-### Exam Topics
+### Streams
+
+Streams are infinite lists - they can be useful for user input, lists of number sequences, etc.
+
+We need to delay evaluation so that we can get only a few elements of the stream at a time. Otherwise, we will get a stack overflow!
+
+```ocaml
+(* without delayed evaluation - 
+	will cause stack overflow! *)
+type 'a stream =
+  | Cons of 'a * 'a stream
+```
+
+---
+
+```ocaml
+(* With delayed evaluation *)
+type 'a stream =
+  Cons of 'a * (unit -> 'a stream)
+```
+To access a value after the first, we will need apply a function with unit input. For example, nats is the stream of natural numbers starting at 0:
+
+```ocaml
+# let rec from n = 
+  Cons (n, fun () -> from (n+1));;
+  
+val from : int -> int stream = <fun>
+
+# let nats = from 0;;
+val nats : int stream = Cons (0, <fun>)
+```
+
+---
+### Exam Topics Professor Clarkson is Very Excited About!
 static semantics
 dynamic semantics
 [higher-order functions](http://www.cs.cornell.edu/courses/cs3110/2018fa/textbook/hop/functions.html)
