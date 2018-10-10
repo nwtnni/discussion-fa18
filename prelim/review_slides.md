@@ -24,7 +24,7 @@ For example, we can partially apply a function:
 
 # let mul5 = mul 5;; (* multiplies 5 and y *)
 ```
-We didn't need to give a name to the internal function (```fun y -> x * y```) because we don't use it elsewhere.
+We didn't need to give a name to the internal function (`fun y -> x * y`) because we don't use it elsewhere.
 
 Now we can use the mul5 function to multiply anything by 5:
 ```ocaml
@@ -106,7 +106,7 @@ let double x = 2 * x
 let quad x = twice double x
 ```
 
-Here, ```quad``` takes in ```twice``` as an input and ```twice``` takes in and ```double``` as an input.
+Here, `quad` takes in `twice` as an input and `twice` takes in and `double` as an input.
 
 ---
 ### Maps
@@ -122,7 +122,7 @@ let add1 lst = map (fun x -> x+1) lst
 let concat3110 = map (fun x -> x ^ "3110") lst
 ```
 
-This also shows another use for anonymous functions! (i.e. ```fun x -> x + 1```)
+This also shows another use for anonymous functions! (i.e. `fun x -> x + 1`)
 
 ---
 ### Fold Left/Fold Right
@@ -196,7 +196,7 @@ http://www.cs.cornell.edu/courses/cs3110/2018fa/textbook/modules/ex_queues.html
 
 ---
 ### Include vs. Open
-Use ```include``` and ```open``` to make code from one module accessable in another.
+Use `include` and `open` to make code from one module accessable in another.
 
 Include: essentially the same as copy-pasting your code!
 
@@ -220,7 +220,7 @@ module ListStack : Stack = struct
   ...
 end
 ```
-We can now access ```the_answer = 42``` in our ListStack, but what if we used open instead of include?
+We can now access `the_answer = 42` in our ListStack, but what if we used open instead of include?
 
 ---
 ### Functors
