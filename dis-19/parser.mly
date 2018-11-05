@@ -14,14 +14,16 @@
 %start prog
 
 %%
-prog: 
-  | stm EOF  { $1 }
-  | stm prog { Seq($1, $2) }
+prog: stms EOF { $1 }
+
+stms:
+  | stm stms { Seq($1, $2) }
+  | stm      { $1 }
 
 stm:
   | VAR ASSIGN exp    { Assign($1, $3) }
   | PRINT exp         { Print($2) }
-  | LBRACK stm RBRACK { Scope($2) }
+  | LBRACK stms RBRACK { Scope($2) }
 
 exp:
   | prim ADD exp { Add($1, $3) }
