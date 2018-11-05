@@ -27,7 +27,7 @@ end
 let rec eval_exp (env: Env.t) (e: exp) : int =
   failwith "Unimplemented"
 
-let rec eval_stm (env: Env.t) (s: stm): unit =
+let rec eval_stm (env: Env.t) (s: stm): Env.t =
   failwith "Unimplemented"
 
 let () =
@@ -35,4 +35,5 @@ let () =
   let lexbuf = Lexing.from_channel file in
   let program = Parser.prog Lexer.token lexbuf in
   let env = Env.empty in
-  eval_stm env program
+  let _ = eval_stm env program in
+  ()

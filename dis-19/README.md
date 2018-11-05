@@ -12,7 +12,8 @@ To get some practice with the environment model, we'll be implementing
 an interpreter for a bare-bones programming language that we'll 
 call `Plus` (because that's about all it can do). In `Plus`, there
 are expressions, which evaluate to integers, and statements, which
-don't evaluate to anything, but produce side effects:
+cause side effects (like printing to `stdout` or modifying the environment).
+
 
 ### Expressions
 
@@ -27,8 +28,8 @@ type exp =
 
 ```ocaml
 type stm =
-| Assign of string * exp (* Variable assignment implemented via environment *)
-| Seq of stm * stm       (* Two statements in sequence *)
+| Assign of string * exp (* Updates the environment with a new variable binding *)
+| Seq of stm * stm       (* Executes two statements in sequence *)
 | Print of exp           (* Prints an expression *)
 | Scope of stm           (* Creates a new scope for variable bindings *)
 ```
@@ -77,10 +78,11 @@ let rec eval_exp (env: Env.t) (e: exp) : int =
   failwith "Unimplemented"
 ```
 
-**eval_stm** executes a statement in the given environment:
+**eval_stm** executes a statement in the given environment and returns the
+(possibly) updated environment:
 
 ```ocaml
-let rec eval_stm (env: Env.t) (s: stm): unit =
+let rec eval_stm (env: Env.t) (s: stm): Env.t =
   failwith "Unimplemented"
 ```
 
