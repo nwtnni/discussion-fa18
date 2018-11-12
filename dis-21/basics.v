@@ -13,7 +13,7 @@ Definition pred (n: nat) : nat
   (* TODO: replace this line *). Admitted.
 
 (** [even n] is [true] if [n] is even, or else [false]. *)
-Definition even (n: nat) : bool
+Fixpoint even (n: nat) : bool
   (* TODO: replace this line *). Admitted.
 
 (** Logic Theorems *)
