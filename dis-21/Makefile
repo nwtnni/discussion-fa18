@@ -1,4 +1,4 @@
-.PHONY = eval
+.PHONY = eval clean
 
 eval:
 	ocamlbuild -use-ocamlfind eval.byte
