@@ -9,23 +9,22 @@ Here's what the result type looks like:
 
 ```ocaml
 type ('ok, 'err) result =
-| Val of 'ok
-| Exn of 'err
+| Ok of 'ok
+| Err of 'err
 
 let (>>=) result f = match result with
-| Val v -> f v
-| Exn e -> Exn e
+| Ok v -> f v
+| Err e -> Err e
 ```
 
 For our simple interpreter, the `'ok` and `'err` types are:
 
 ```ocaml
-type ok =
-| Unit
+type value =
 | Bool of bool
 | Int of int
 
-type err =
+type error =
 | ExpectedInt
 | ExpectedBool
 ```
