@@ -16,10 +16,10 @@ type error =
 | ExpectedInt
 | ExpectedBool
 
-let eval_exp (e: exp) : (value, error) result =
+let rec eval_exp (e: exp) : (value, error) result =
   failwith "unimplemented"
 
-let eval_stm (s: stm) : (unit, error) result =
+let rec eval_stm (s: stm) : (unit, error) result =
   failwith "unimplemented"
 
 let () =
