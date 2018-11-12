@@ -26,5 +26,7 @@ let () =
   let file = open_in (Sys.argv.(1)) in
   let lexbuf = Lexing.from_channel file in
   let program = Parser.program Lexer.token lexbuf in
-  let _ = eval_stm program in
-  ()
+  match eval_stm program with
+  | Ok ()            -> ()
+  | Err ExpectedInt  -> print_endline "Error: expected int"
+  | Err ExpectedBool -> print_endline "Error: expected bool"
