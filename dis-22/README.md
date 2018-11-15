@@ -31,6 +31,7 @@ Now, we can begin our proof. Note that our proposition has four parts:
 2. A
 3. B
 4. C
+
 The inputs (or givens) of our proof are 1, 2, and 3, while 4 is our output (what we are trying to prove). When we write our proof, we need to introduce some variables. Let's use ```A```, ```B```, and ```C``` to describe the A, B, and C in our proposition. We also need to provide variable names for our inputs, 1, 2, and 3 above. You can think of this as evidence for this input; we are basically telling Coq that it can assume these are true. Let's call ```f``` our evidence for A /\ B -> C, ```a``` our evidence for A, and ```b``` our evidence for B. So far, we have:
 
 ```coq
