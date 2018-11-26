@@ -1,14 +1,10 @@
 #directory "_build";;
 #require "str";;
-#load "lambda.cmo";;
-#load "bruijn.cmo";;
+#load "ast.cmo";;
 #load "parser.cmo";;
 #load "lexer.cmo";;
-#load "main.cmo";;
+#load "eval.cmo";;
 open Main;;
 
-let format_lambda fmt expr = Format.fprintf fmt "%s" (Lambda.show expr);;
+let format_lambda fmt expr = Format.fprintf fmt "%s" (Ast.to_string expr);;
 #install_printer format_lambda;;
-
-let format_bruijn fmt expr = Format.fprintf fmt "%s" (Bruijn.show expr);;
-#install_printer format_bruijn;;

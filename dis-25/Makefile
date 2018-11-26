@@ -1,7 +1,7 @@
 .PHONY: default clean
 
 default:
-	ocamlbuild -use-ocamlfind main.byte
+	ocamlbuild -use-ocamlfind eval.byte
 
 clean:
-	rm -rf main.byte _build
+	rm -rf eval.byte _build

@@ -62,3 +62,8 @@ let rec step_by_name = function
   step_by_name e1 >>= fun e1' ->
   Some (App (e1', e2))
 | _ -> None
+
+let parse f = f
+  |> open_in
+  |> Lexing.from_channel
+  |> Parser.exp Lexer.token
