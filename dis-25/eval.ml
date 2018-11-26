@@ -75,3 +75,20 @@ let parse f = f
   |> open_in
   |> Lexing.from_channel
   |> Parser.exp Lexer.token
+
+let rec fix f =
+  fun e -> match f e with
+  | None -> e
+  | Some e' -> (fix f) e'
+
+let eval_by_value =
+  fix begin fun e ->
+    print_endline (Ast.to_string e);
+    step_by_value e
+  end
+
+let eval_by_name =
+  fix begin fun e ->
+    print_endline (Ast.to_string e);
+    step_by_name e
+  end
