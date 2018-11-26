@@ -4,7 +4,6 @@
 #load "parser.cmo";;
 #load "lexer.cmo";;
 #load "eval.cmo";;
-open Main;;
 
 let format_lambda fmt expr = Format.fprintf fmt "%s" (Ast.to_string expr);;
 #install_printer format_lambda;;

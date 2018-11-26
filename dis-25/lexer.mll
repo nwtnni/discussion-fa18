@@ -9,5 +9,5 @@ rule token = parse
   | '('                                           { LPAREN }
   | ')'                                           { RPAREN }
   | '.'                                           { DOT }
-  | ['a'-'z' 'A'-'Z']['a'-'z' 'A'-'Z' '_']* as id { ID id }
+  | ['a'-'z' 'A'-'Z']['a'-'z' 'A'-'Z' '_' '\'']* as id { ID id }
   | eof                                           { EOF }
