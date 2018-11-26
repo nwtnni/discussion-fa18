@@ -16,7 +16,7 @@ exp:
 ;
 
 abs:
-    LAMBDA ID DOT app { Abs ($2, $4) }
+    LAMBDA ID DOT abs { Abs ($2, $4) }
   | app               { $1 }
   ;
 

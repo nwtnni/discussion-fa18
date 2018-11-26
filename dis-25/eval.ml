@@ -1,5 +1,6 @@
 open Ast
 
+module M = Map.Make (String)
 module S = Set.Make (String)
 
 let (>>=) opt f = match opt with
@@ -15,25 +16,31 @@ let incr y =
   let counter = ref None in
   fun () -> match !counter with
   | None   ->
-    counter := Some 0;
+    counter := Some 1;
     y
+  | Some n when n < 3 ->
+    counter := Some (n + 1);
+    y ^ (String.make n '\'')
   | Some n ->
     counter := Some (n + 1);
     y ^ (string_of_int n)
 
-let rec rename x = function
-| Var y -> Var y
+let rec rename fvs x ctx = function
+| Var y ->
+  begin match M.find_opt y ctx with
+  | Some y' -> Var y'
+  | None -> Var y
+  end
 | App (e1, e2) ->
-  App (rename x e1, rename x e2)
+  App (rename fvs x ctx e1, rename fvs x ctx e2)
 | Abs (y, e) ->
-  let e' = rename x e in
-  let fvs = free e' in
   let y' = ref y in
   let next = incr y in
   while !y' = x || S.mem !y' fvs do
     y' := next ()
   done;
-  Abs (!y', e')
+  let ctx' = M.add y !y' ctx in
+  Abs (!y', rename fvs x ctx' e)
 
 let sub e v x =
   let rec sub' v x = function
@@ -42,7 +49,8 @@ let sub e v x =
   | Abs (y, e) -> Abs (y, sub' v x e)
   | App (e1, e2) -> App (sub' v x e1, sub' v x e2)
   in
-  rename x e |> sub' v x
+  let fvs = free v in
+  rename fvs x M.empty e |> sub' v x
 
 let rec step_by_value = function
 | App (Abs (x, e1), e2) when Ast.is_value e2 ->
