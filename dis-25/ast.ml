@@ -3,6 +3,10 @@ type t =
 | Abs of string * t
 | App of t * t
 
+let is_value = function
+| Abs (_, _) -> true
+| _ -> false
+
 let rec to_string = function
 | Var x -> x
 | Abs (x, e) ->
