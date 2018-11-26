@@ -21,12 +21,9 @@ let incr y =
   | None   ->
     counter := Some 1;
     y
-  | Some n when n < 3 ->
-    counter := Some (n + 1);
-    y ^ (String.make n '\'')
   | Some n ->
     counter := Some (n + 1);
-    y ^ (string_of_int n)
+    y ^ (String.make n '\'')
 
 (** Renames variables to avoid capture *)
 let rec rename fvs x ctx = function

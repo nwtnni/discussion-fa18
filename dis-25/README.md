@@ -19,7 +19,7 @@ type t =
 ```
 
 The untyped lambda calculus is Turing complete! You can express
-arbitrarilyy complex computations using nothing but pure functions.
+arbitrarily complex computations using nothing but pure functions.
 Today we'll look at some encodings of common types like
 numbers, booleans, and pairs.
 
