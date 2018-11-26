@@ -71,6 +71,19 @@ let rec step_by_name = function
   Some (App (e1', e2))
 | _ -> None
 
+let rec step_by_full = function
+| App (Abs (x, e1), e2) ->
+  Some (sub e1 e2 x)
+| App (e1, e2) ->
+  begin match step_by_full e1 with
+  | None -> step_by_full e2 >>= fun e2' -> Some (App (e1, e2'))
+  | Some e1' -> Some (App (e1', e2))
+  end
+| Abs (x, e) ->
+  step_by_full e >>= fun e' ->
+  Some (Abs (x, e'))
+| _ -> None
+
 let parse_file f = f
   |> open_in
   |> Lexing.from_channel
@@ -88,14 +101,12 @@ let rec fix f =
   | None -> e
   | Some e' -> (fix f) e'
 
-let eval_by_value =
+let eval f =
   fix begin fun e ->
     print_endline (Ast.to_string e);
-    step_by_value e
+    f e
   end
 
-let eval_by_name =
-  fix begin fun e ->
-    print_endline (Ast.to_string e);
-    step_by_name e
-  end
+let eval_by_value = eval step_by_value
+let eval_by_name = eval step_by_name
+let eval_by_full = eval step_by_full
