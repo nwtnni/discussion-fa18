@@ -16,16 +16,20 @@ exp:
 ;
 
 abs:
-    LAMBDA ID DOT abs { Abs ($2, $4) }
-  | app               { $1 }
+  | LAMBDA ids { $2 }
+  | app        { $1 }
   ;
 
+ids:
+  | ID DOT abs { Abs ($1, $3) }
+  | ID ids     { Abs ($1, $2) }
+
 app:
-    app var { App ($1, $2) }
+  | app var { App ($1, $2) }
   | var     { $1 }
   ;
 
 var:
-    ID                { Var $1 }
+  | ID                { Var $1 }
   | LPAREN abs RPAREN { $2 }
   ;

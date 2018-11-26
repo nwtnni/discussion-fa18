@@ -5,5 +5,7 @@
 #load "lexer.cmo";;
 #load "eval.cmo";;
 
+open Eval;;
+
 let format_lambda fmt expr = Format.fprintf fmt "%s" (Ast.to_string expr);;
 #install_printer format_lambda;;

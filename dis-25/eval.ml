@@ -71,10 +71,17 @@ let rec step_by_name = function
   Some (App (e1', e2))
 | _ -> None
 
-let parse f = f
+let parse_file f = f
   |> open_in
   |> Lexing.from_channel
   |> Parser.exp Lexer.token
+
+let parse s = s
+  |> Lexing.from_string
+  |> Parser.exp Lexer.token
+
+let apply e es =
+  List.fold_left (fun acc app -> App (acc, app)) e es
 
 let rec fix f =
   fun e -> match f e with
