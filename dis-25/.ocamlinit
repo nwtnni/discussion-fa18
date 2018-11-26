@@ -1,0 +1,14 @@
+#directory "_build";;
+#require "str";;
+#load "lambda.cmo";;
+#load "bruijn.cmo";;
+#load "parser.cmo";;
+#load "lexer.cmo";;
+#load "main.cmo";;
+open Main;;
+
+let format_lambda fmt expr = Format.fprintf fmt "%s" (Lambda.show expr);;
+#install_printer format_lambda;;
+
+let format_bruijn fmt expr = Format.fprintf fmt "%s" (Bruijn.show expr);;
+#install_printer format_bruijn;;
