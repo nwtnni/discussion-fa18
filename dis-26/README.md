@@ -70,7 +70,7 @@ We can use static semantics to tell when our argument is valid or invalid. This 
 In Coq theorems, we saw that we needed to provide evidence for propositions in our argument in order to prove them. What evidence would we need for:
 
 1. A /\ B?
-2. A \/ B?
+2. A \\/ B?
 3. A => B?
 
 We'll use ```|- A``` as a way of saying "evidence for A".
@@ -81,6 +81,7 @@ We'll use ```|- A``` as a way of saying "evidence for A".
 Conversely, what evidence can be assumed from a statement constitutes **Elimination Rules**
 
 **Q** What information can we get from A /\ B? 
+
 **A**
 
 If |- A /\ B then |- A
@@ -123,6 +124,7 @@ _____
 ```
 
 ## Notation for Assumptions
+
 ```F |- G ``` means that assuming F is provable, then G is provable.
 
 Some rules/axioms:
@@ -145,13 +147,21 @@ Some rules/axioms:
 4. ```|- A => (B => A)``` by (3) and => introduction rule
 
 As a graphical representation (proof tree):
+
 _______assump.
+
 A |- A
+
 __________weak.
+
 A, B |- A
+
 ____________=> intro.
+
 A |- B => A
+
 ___________________=> intro.
+
 |- (A => (B => A))
 
 As an OCaml program, we can write this as:
@@ -173,14 +183,23 @@ Note the type!
 7. |- A => (B => (A/\B)) by (6) and => intro.
 
 _______assump           _______ assump
+
 A |- A                  B |- B
+
 _________weak           ___________weak
+
 A, B |- A               A, B |- B
+
 ___________________________________ /\ intro.
+
     A, B |- A /\ B
+
 ___________________________________ => intro
+
     A |- B => (A /\ B)
+
 ___________________________________ => intro
+
     |- A => (B => (A /\ B))
 
 OCaml:
