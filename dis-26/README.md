@@ -54,6 +54,18 @@ Therefore, 3110 students are CS students.
 
 **Q** How would you write this formally? What's the problem with this argument?
 
+**A** 
+
+```
+C -> H
+S -> H
+______
+S -> C
+```
+
+Looking at the formal expressions, we can see this is actually a fallacy! This assumption does not hold!
+We can use static semantics to tell when our argument is valid or invalid. This is called a proof system/deductive system.
+
 ## Evidence
 In Coq theorems, we saw that we needed to provide evidence for propositions in our argument in order to prove them. What evidence would we need for:
 
@@ -69,6 +81,10 @@ We'll use ```|- A``` as a way of saying "evidence for A".
 Conversely, what evidence can be assumed from a statement constitutes **Elimination Rules**
 
 **Q** What information can we get from A /\ B? 
+**A**
+
+If |- A /\ B then |- A
+If |- A /\ B then |- B
 
 ## Common logic rules:
 Let's go through and convince ourselves of the following rules:
@@ -88,6 +104,7 @@ A => B
 _____
 ~A
 ```
+The following two are common logical fallacies, that do not actually hold!
 
 Affirming the consequent:
 ```
@@ -109,6 +126,7 @@ _____
 ```F |- G ``` means that assuming F is provable, then G is provable.
 
 Some rules/axioms:
+
 | Rule name | Rule                                      |
 |-----------|-------------------------------------------|
 | /\ intro  | if F |- f1 and F |- f2 then F |- f1 /\ f2 |
@@ -143,3 +161,29 @@ let t (a:'a) (b:'b) : 'a = a
 Note the type!
 
 **Q** Show ```|- A => (B => (A /\ B))``` and write the graphical representation. How would you write this in OCaml?
+
+**A** 
+
+1. A |- A by assump.
+2. A, B |- by weak.
+3. B |- B by assump.
+4. A, B |- B by weak.
+5. A, B |- A/\B by (2), (4), and /\ intro.
+6. A |- B => (A/\B) by (5) and => intro.
+7. |- A => (B => (A/\B)) by (6) and => intro.
+
+_______assump           _______ assump
+A |- A                  B |- B
+_________weak           ___________weak
+A, B |- A               A, B |- B
+___________________________________ /\ intro.
+    A, B |- A /\ B
+___________________________________ => intro
+    A |- B => (A /\ B)
+___________________________________ => intro
+    |- A => (B => (A /\ B))
+
+OCaml:
+```OCaml
+let pair (a:'a) (b:'b) : ('a*'b) = (a,b)
+```
