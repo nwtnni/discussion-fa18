@@ -18,7 +18,7 @@ f ::= P | f1 /\ f2 | f1 \/ f2 | f1 => f2 | ~f
 | f      | Meta-variable for formulas     |
 | P      | Meta-variable for propositions |
 | /\     | AND                            |
-|  \/     | OR                             |
+| \\/     | OR                             |
 | =>     | IMPLIES                        |
 | ~      | NOT                            |
 
