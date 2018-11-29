@@ -147,22 +147,16 @@ Some rules/axioms:
 4. ```|- A => (B => A)``` by (3) and => introduction rule
 
 As a graphical representation (proof tree):
-
+```
 _______assump.
-
 A |- A
-
 __________weak.
-
 A, B |- A
-
 ____________=> intro.
-
 A |- B => A
-
 ___________________=> intro.
-
 |- (A => (B => A))
+```
 
 As an OCaml program, we can write this as:
 ```ocaml
@@ -182,25 +176,18 @@ Note the type!
 6. A |- B => (A/\B) by (5) and => intro.
 7. |- A => (B => (A/\B)) by (6) and => intro.
 
+```
 _______assump           _______ assump
-
 A |- A                  B |- B
-
 _________weak           ___________weak
-
 A, B |- A               A, B |- B
-
 ___________________________________ /\ intro.
-
     A, B |- A /\ B
-
 ___________________________________ => intro
-
     A |- B => (A /\ B)
-
 ___________________________________ => intro
-
     |- A => (B => (A /\ B))
+```
 
 OCaml:
 ```OCaml
