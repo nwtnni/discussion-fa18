@@ -57,8 +57,8 @@ let rec insert x = function
 ## Red-Black Trees
 
 - Like BST, but have rules about node coloring:
-No two adjacent red nodes on a path
-Each path from root to leaf has the same black height
+	- No two adjacent red nodes on a path
+	- Each path from root to leaf has the same black height
 
 ![RBT](https://github.com/nwtnni/discussion/blob/master/final/rbt.png)
 
@@ -66,12 +66,15 @@ Each path from root to leaf has the same black height
 
 ```ocaml
 type color = Red | Black
-type ‘a rbtree = Node of color * ‘a * ‘a rbtree * ‘a rbtree | Leaf
+type ‘a rbtree = 
+  Node of color * ‘a * ‘a rbtree * ‘a rbtree | Leaf
 
 let let rec mem x = function
 | Leaf -> false
 | Node (_, y, left, right) -> 
-    x = y || (x < y  && mem x left) || (x > y && mem x right)
+    x = y 
+    || (x < y  && mem x left) 
+    || (x > y && mem x right)
 ```
 
 ---
@@ -124,7 +127,8 @@ type ‘a ref = {mutable contents : ‘a; }
 
 ```ocaml
 #require “lwt”
-let (p : int Lwt.t), r = Lwt.wait()  (* makes promise of an int and a resolver *)
+let (p : int Lwt.t), r = Lwt.wait()  
+          (* makes promise of an int and a resolver *)
 Lwt.state p  (* Currently Sleepl *)
 Lwt.wakeup r 3110
 Lwt.state p (* Currently Return 3110 *)
@@ -161,19 +165,21 @@ end
 - This is our bind operation
 
 ```ocaml
-let log name f = fun x -> (f x, Printf.sprintf “Called %s on %i; “, name x)
+let log name f = fun x -> (f x, Printf.sprintf 
+  “Called %s on %i; “, name x)
 
 let loggable name f  = 
   fun (x, s1) ->
     let (y, s2) = log name f x in (y, s1 ^ s2)
 
 let inc = loggable “inc” (let inc x = x + 1)
+```
+
 ---
 
 ## Compilers
 
 - Translate a higher-level to lower-level language
-	- i.e. OCaml to MIPS
 - Phases:
 	- Lexing (source code to tokens)
 	- Parsing (tokens to abstract syntax tree (AST))
@@ -212,6 +218,7 @@ Type stm =
 - Binary operations `bop` evaluate both sides in some order until done
 
 Problem: evaluates everything, even if we don’t need it!
+
 --- 
 
 ## Environment Model
@@ -236,6 +243,7 @@ Problem: evaluates everything, even if we don’t need it!
 ```
 Dynamic result: 2
 Lexical result: 1
+
 ---
 
 ## Type Inference
@@ -249,11 +257,10 @@ Solve constraints like a set of linear equations
 
 ---
 
-Example:
-
 ```ocaml
 let inc y = y + 1
 ```
+
 Equivalently:
 ```ocaml
 let inc = fun y -> ((+) 1) y
