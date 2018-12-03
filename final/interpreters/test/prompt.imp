@@ -1,0 +1,5 @@
+x := 0;
+while x != 100 do
+    x := input;
+    print x
+done
