@@ -34,7 +34,7 @@ type ‘a stream =
 - Recursively make your way down the tree with time O(log n)
 - Include a balancing operation to keep operations efficient
 
-![BST](https://github.com/nwtnni/discussion/blob/master/final/bst.jpg)
+<img src="https://github.com/nwtnni/discussion/tree/master/final/bst.png" style="width: 50%" align="left"/>
 
 ---
 
@@ -60,7 +60,7 @@ let rec insert x = function
 No two adjacent red nodes on a path
 Each path from root to leaf has the same black height
 
-![RBT](https://github.com/nwtnni/discussion/blob/master/final/rbg.jpg)
+![RBT](https://github.com/nwtnni/discussion/tree/master/final/rbt.png)
 
 ---
 
